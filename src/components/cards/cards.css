@@ -1,0 +1,35 @@
+.cards{
+    display: flex;
+    gap: 10px;
+
+}
+.parentcontanier{
+    width: 100%;
+}
+/* For screens <= 1200px (Tablets and small desktops) */
+@media screen and (max-width: 1200px) {
+  .cards {
+   
+    flex-direction: column;
+    /* Centers the cards in column layout */
+   
+  }
+
+  .parentcontainer {
+    height: 9rem; /* Let height adjust based on content */
+  
+  }
+}
+
+/* For screens <= 768px (Mobile) */
+@media screen and (max-width: 768px) {
+  .cards {
+    width: 90%;
+    padding: 1rem;
+  }
+
+  .parentcontainer {
+    width: 100%;
+    padding: 0 1rem;
+  }
+}

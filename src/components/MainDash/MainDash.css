@@ -1,0 +1,27 @@
+.MainDash{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+/* For tablets and small desktops */
+@media screen and (max-width: 1200px) {
+  .MainDash {
+               /* Ensure flex is applied */    /* Stack children vertically */
+    justify-content: flex-start;
+       /* Center children horizontally */
+    margin-top: 2rem;
+                 /* Optional: add spacing between items */
+  }
+}
+
+/* For mobile phones */
+@media screen and (max-width: 768px) {
+  .MainDash {
+    width: 100%;                 /* Ensure full width */
+    padding: 1rem;               /* Add side padding */
+    display: flex;
+    flex-direction: column;
+    align-items: center;         /* Center items */
+    gap: 1.5rem;                 /* Maintain spacing */
+  }
+}

@@ -1,0 +1,28 @@
+.Rightside{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: space-evenly;
+}
+@media screen and (max-width: 1200px) {
+  .Rightside {
+    justify-content: flex-start;
+    margin-top: 3rem;
+    width: 100%; /* ensure full width on smaller screens */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .Rightside {
+    width: 100%;
+    margin-top: 0; /* optional: give a little space */
+      /* optional: side padding for better spacing */
+  }
+
+  .Rightside>div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; /* ensures inner content is full width */
+  }
+}

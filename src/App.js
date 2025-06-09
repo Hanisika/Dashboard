@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.css'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import Sidebar from './components/Sidebar/sidebar';
+import MainDash from './components/MainDash/MainDash';
+import Rightside from './components/Rightside/Rightside';
+function App(){
+return(
+  <div className="App">
+   <div className='AppGlass'>
+  <Sidebar />
+  <MainDash/>
+  <Rightside/>
+   </div>
+
+  </div>
+);
 }
-
 export default App;
