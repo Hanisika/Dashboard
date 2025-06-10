@@ -24,8 +24,14 @@
 /* For screens <= 768px (Mobile) */
 @media screen and (max-width: 768px) {
   .cards {
-    width: 90%;
-    padding: 1rem;
+    flex-direction: column;
+    align-items: center;     /* ⬅️ Center cards */
+    width: 100%;
+    gap: 1.5rem;
+  }
+
+  .CompactCard {
+    width: 90%;              /* ⬅️ Each card takes full width */
   }
 
   .parentcontainer {

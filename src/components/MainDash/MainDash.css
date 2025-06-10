@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding: 1rem;
+    margin-top: 80px;
 }
 /* For tablets and small desktops */
 @media screen and (max-width: 1200px) {
@@ -17,11 +19,7 @@
 /* For mobile phones */
 @media screen and (max-width: 768px) {
   .MainDash {
-    width: 100%;                 /* Ensure full width */
-    padding: 1rem;               /* Add side padding */
-    display: flex;
-    flex-direction: column;
-    align-items: center;         /* Center items */
-    gap: 1.5rem;                 /* Maintain spacing */
+    align-items: center;
+    padding: 1rem;
   }
 }

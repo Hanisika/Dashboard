@@ -15,14 +15,12 @@
 @media screen and (max-width: 768px) {
   .Rightside {
     width: 100%;
-    margin-top: 0; /* optional: give a little space */
-      /* optional: side padding for better spacing */
+    align-items: center;
+    margin-top: 1rem;
   }
 
-  .Rightside>div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%; /* ensures inner content is full width */
+  .Rightside > div {
+    width: 90%;
   }
 }
+

@@ -1,67 +1,72 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Logo from '../../imgs/logo.png';
-import './sidebar.css'
-import {SidebarData} from "../../Data/data";
-import { FaSignOutAlt , FaBars} from 'react-icons/fa';
-import { useState } from 'react';
-import {motion} from 'framer-motion'
-
+import './sidebar.css';
+import { SidebarData } from "../../Data/data";
+import { FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 
 const Sidebar = () => {
-   const [selected, setSelected] = useState(0)
-   const [expanded,setExpanded]=useState(true)
+  const [selected, setSelected] = useState(0);
+  const [expanded, setExpanded] = useState(false); // sidebar is hidden by default
 
-   const sidebarVarients={
-    true:{
-      left:'0'
-    },
-    false:{
-      left:'-60%'
-    }
-   }
+  const sidebarVariants = {
+    true: { left: '0' },
+    false: { left: '-60%' }
+  };
+
+  const isMobile = window.innerWidth <= 768;
+
   return (
     <>
-      <div className="bar" style={expanded? 
-        {left:"60%"} :{left:"5%"}}
-        onClick={()=>setExpanded(!expanded)
-        }
-        >
-      < FaBars/>
-      </div>
-      <motion.div className="sidebar" 
-      varients={sidebarVarients}
-     animate={window.innerwidth<=768?`${expanded}`:''}
-      >
-        <div className="logo">
-            {/*logo */}
-        <img src={Logo} alt="logo"  />
-        <span>
-            sh<span>o</span>ps
-        </span>
-    </div>
-     {/* menu */}
 
-     <div className="menu">
-       {SidebarData.map((item,index)=>{
-        return(
-          <div className={selected===index?'menuitems active':'menuitems'}
-            key={index}
-          onClick={()=>setSelected(index)}>
-            <item.icon/>
-            <span>
-              {item.heading}
-            </span>
-          </div>
-        )})}
-        <div className="menuitems">
-          <FaSignOutAlt/>
+      {/* Menu Icon (hamburger) */}
+      {isMobile && (
+        <div
+          className="bar"
+          onClick={() => setExpanded(!expanded)}
+        >
+          <FaBars />
         </div>
-     </div>
-    </motion.div>
-    </> 
-   
+      )}
+
+      {/* Sidebar */}
+      <motion.div
+        className="Sidebar"
+        variants={sidebarVariants}
+        animate={isMobile ? `${expanded}` : ''}
+      >
+        {/* Logo */}
+        <div className="logo">
+          <img src={Logo} alt="logo" />
+          <span>
+            sh<span>o</span>ps
+          </span>
+        </div>
+
+        {/* Menu Items */}
+        <div className="menu">
+          {SidebarData.map((item, index) => (
+            <div
+              className={selected === index ? 'menuitems active' : 'menuitems'}
+              key={index}
+              onClick={() => {
+                setSelected(index);
+                setExpanded(false); // hide sidebar on menu click (mobile)
+              }}
+            >
+              <item.icon />
+              <span>{item.heading}</span>
+            </div>
+          ))}
+
+          <div className="menuitems">
+            <FaSignOutAlt />
+          </div>
+        </div>
+      </motion.div>
+    </>
   );
 };
 
-export default Sidebar
+export default Sidebar;

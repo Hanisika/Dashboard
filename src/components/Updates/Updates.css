@@ -27,3 +27,14 @@
 .noti>div>span:nth-of-type(1){
     font-weight: bold;
 }
+@media screen and (max-width: 768px) {
+  .Updates {
+    align-items: center;
+    width: 100%;
+  }
+
+  .update {
+    width: 90%;
+    flex-direction: row;
+  }
+}

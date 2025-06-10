@@ -1,37 +1,83 @@
-.MuiTableRow-root>*{
-    padding: 10px;
-}
-.MuiTableRow-root.MuiTableRow-head>*{
-    font-weight: bold;
-}
-.Table td,th{
-    border:none!important;
+/* ====== Desktop / Base Styling ====== */
+.Table {
+  width: 70%;
+          /* ✅ Restrict width */
+  margin: 2rem auto;        /* ✅ Centered */
+  font-size: 0.85rem;       /* ✅ Compact font */
+  border-collapse: collapse;
+  background: white;
+  border-radius: 0.7rem;
+  overflow: hidden;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 }
 
-.Table:first-child{
-    border-radius: 0.7rem !important;
+/* Reduce row and cell padding */
+.MuiTableRow-root {
+  height: 40px;             /* ✅ Reduce height */
 }
-.status{
-    padding: 8px;
-    border-radius: 9px;
+.MuiTableRow-root > * {
+  padding: 6px 10px;        /* ✅ Less padding */
 }
-.Detail{
-    color:rgb(0, 211, 243) !important;
+.MuiTableRow-root.MuiTableRow-head > * {
+  font-weight: bold;
 }
+
+/* Remove borders */
+.Table td,
+.Table th {
+  border: none !important;
+}
+
+/* Table's first child roundness */
+.Table:first-child {
+  border-radius: 0.7rem !important;
+}
+
+/* Status badge styling */
+.status {
+  padding: 6px 10px;
+  border-radius: 9px;
+}
+
+/* Highlight clickable links */
+.Detail {
+  color: rgb(0, 211, 243) !important;
+}
+
+/* ====== Tablet / Small Laptop ====== */
 @media screen and (max-width: 1200px) {
   .Table {
-    width: 170%; /* 170% may overflow; use 100% for better responsiveness */
+    width: 90%;              /* ✅ Make it responsive */
     margin-top: 2rem;
-    overflow-x: auto; /* enable horizontal scroll if content overflows */
+    overflow-x: auto;        /* Scroll if needed */
   }
 }
 
+/* ====== Mobile View ====== */
 @media screen and (max-width: 768px) {
   .Table {
-    width: 18rem;
+    width: 95%;
+    margin: auto;
+    font-size: 0.75rem;
+  }
+
+  .Table thead {
+    display: none;           /* ✅ Hide headers for mobile if needed */
+  }
+
+  .Table tr {
+    display: block;
+    margin-bottom: 1rem;
+    background: white;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+  }
+
+  .Table td {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* optional padding */
+    justify-content: space-between;
+    padding: 0.3rem 0;
+    border-bottom: 1px solid #eee;
   }
 }
