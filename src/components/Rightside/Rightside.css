@@ -4,6 +4,10 @@
     width: 90%;
     justify-content: space-evenly;
 }
+.h3{
+  margin-top: 9rem;
+
+}
 @media screen and (max-width: 1200px) {
   .Rightside {
     justify-content: flex-start;
