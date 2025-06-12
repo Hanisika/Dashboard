@@ -3,14 +3,16 @@ import Sidebar from './components/Sidebar/sidebar';
 import MainDash from './components/MainDash/MainDash';
 import Rightside from './components/Rightside/Rightside';
 import OrderForm from './components/OrderForm/OrderForm';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => (
   <div className="App">
-    <div className='AppGlass'>
+    <div className="AppGlass">
       <Sidebar />
-      <MainDash />
-      <Rightside /> {/* This will include your button only */}
+      <div className="MainContent">
+        <Outlet /> 
+      </div>
+      <Rightside />
     </div>
   </div>
 );
@@ -18,8 +20,10 @@ const DashboardLayout = () => (
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<DashboardLayout />} />
-      <Route path="/order" element={<OrderForm />} />
+      <Route path="/" element={<DashboardLayout />}>
+        <Route index element={<MainDash />} />
+        <Route path="orders" element={<OrderForm />} />
+      </Route>
     </Routes>
   );
 }

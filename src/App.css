@@ -8,18 +8,22 @@
   justify-content: center;
   align-items: center;
 }
-.AppGlass{
+.AppGlass {
+  background-color: rgb(232, 234, 238);
   display: grid;
+  grid-template-columns: 11rem auto 15rem;
   overflow: hidden;
-  grid-template-columns: 11rem auto 20rem;
-  gap:10px;
 }
 @media screen and (max-width: 1200px) {
   .AppGlass {
     grid-template-columns: 10% 50% auto;
     overflow-y: auto;
-  }
+  
+  display: flex;
+  width: 100%;
 }
+
+  }
 
 @media screen and (max-width: 768px) {
   .AppGlass {

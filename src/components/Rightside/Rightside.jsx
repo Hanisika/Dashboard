@@ -6,30 +6,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 const Rightside = () => {
-  const navigate = useNavigate();
-
-  const goToOrderPage = () => {
-    navigate('/order'); // Navigate to OrderForm page
-  };
- 
   return (
     <>
-    <div style={{ padding: "20px" }}>
-      
-      {/* Top right order button */}
-      <div style={{ textAlign: 'right' }}>
-        <button onClick={goToOrderPage} style={{
-          padding: '10px 20px',
-          backgroundColor: '#28a745',
-          color: '#fff',
-          border: 'none',
-          borderRadius: '5px',
-          cursor: 'pointer',
-          margin:'3rem'
-        }}>
-          Go to Order Form
-        </button>
-      </div>
+    
       
         
   <div className="Rightside">
@@ -43,7 +22,7 @@ const Rightside = () => {
           <Customer/>
     </div>
   </div>  
-  </div>
+  
 
  </> )
 }

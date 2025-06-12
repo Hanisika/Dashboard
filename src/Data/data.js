@@ -1,10 +1,6 @@
 // ICONS
 import {
-  FaHome,
-  FaClipboardList,
-  FaUserFriends,
-  FaBoxOpen,
-  FaChartLine,
+  FaHome, FaClipboardList, FaUser, FaBox, FaChartBar,
   FaDollarSign,
   FaMoneyBillWave,
   FaClipboard,
@@ -16,33 +12,40 @@ import img2 from '../imgs/img2.png';
 import img3 from '../imgs/img3.jpg';
 
 // SIDEBAR DATA
+
 export const SidebarData = [
   {
     icon: FaHome,
     heading: "Dashboard",
+    path: "/"
   },
   {
     icon: FaClipboardList,
     heading: "Orders",
+    path: "/orders"
   },
   {
-    icon: FaUserFriends,
+    icon: FaUser,
     heading: "Customers",
+    path: "/customers"
   },
   {
-    icon: FaBoxOpen,
+    icon: FaBox,
     heading: "Products",
+    path: "/products"
   },
   {
-    icon: FaChartLine,
+    icon: FaChartBar,
     heading: "Analytics",
-  },
+    path: "/analytics"
+  }
 ];
 
 // CARDS DATA
 export const CardsData = [
   {
     title: "Sales",
+    type:"area",
     color: {
       background: 
       "#00bfff",
@@ -61,6 +64,7 @@ export const CardsData = [
   },
   {
     title: "Revenue",
+    type:"bar",
     color: {
       background: "#800080",
       boxShadow: "0px 10px 20px 0px rgb(212, 190, 249)",
@@ -77,6 +81,7 @@ export const CardsData = [
   },
   {
     title: "Expenses",
+    tyle:"line",
     color: {
       background:"#0B1D51",
       boxShadow: "0px 10px 20px 0px rgb(184, 231, 243)",

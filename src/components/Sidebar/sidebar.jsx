@@ -4,6 +4,7 @@ import './sidebar.css';
 import { SidebarData } from "../../Data/data";
 import { FaSignOutAlt, FaBars } from 'react-icons/fa';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 
 const Sidebar = () => {
@@ -46,20 +47,20 @@ const Sidebar = () => {
 
         {/* Menu Items */}
         <div className="menu">
-          {SidebarData.map((item, index) => (
-            <div
-              className={selected === index ? 'menuitems active' : 'menuitems'}
-              key={index}
-              onClick={() => {
-                setSelected(index);
-                setExpanded(false); // hide sidebar on menu click (mobile)
-              }}
-            >
-              <item.icon />
-              <span>{item.heading}</span>
-            </div>
-          ))}
-
+         {SidebarData.map((item, index) => (
+  <Link to={item.path} key={index} style={{ textDecoration: 'none', color: 'inherit' }}>
+    <div
+      className={selected === index ? 'menuitems active' : 'menuitems'}
+      onClick={() => {
+        setSelected(index);
+        setExpanded(false);
+      }}
+    >
+      <item.icon />
+      <span>{item.heading}</span>
+    </div>
+  </Link>
+))}
           <div className="menuitems">
             <FaSignOutAlt />
           </div>

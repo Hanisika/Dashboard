@@ -3,7 +3,8 @@
 width: 90%;                  /* Responsive on small screens */
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 /* Compact card visual */
@@ -12,12 +13,14 @@ width: 90%;                  /* Responsive on small screens */
   padding: 1rem 1.2rem;        /* ✅ Reduced vertical and horizontal padding */
   color: white;
   display: flex;
-  justify-content: space-between;
+  justify-content:space-between;
   flex-direction: column;
   width: 90%;
-  min-height: 90%;    
-  margin-top: 10px;   
-  gap:10px;    /* ✅ Set minimum height */
+  height: 50%;    
+  margin-top: 0px;   
+  gap:3rem;  
+  
+    /* ✅ Set minimum height */
 }
 
 /* Chart box below */
@@ -27,7 +30,7 @@ width: 90%;                  /* Responsive on small screens */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
   padding: 1rem;
   width: 100%;
-  max-height: 250px;       /* ✅ Prevent too tall chart */
+  height: 250px;       /* ✅ Prevent too tall chart */
   overflow: hidden;        /* ✅ Clip anything beyond height */
 }
 
