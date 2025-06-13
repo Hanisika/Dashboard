@@ -1,9 +1,7 @@
 // ICONS
 import {
   FaHome, FaClipboardList, FaUser, FaBox, FaChartBar,
-  FaDollarSign,
-  FaMoneyBillWave,
-  FaClipboard,
+ 
 } from 'react-icons/fa';
 
 // IMAGES

@@ -2,7 +2,7 @@ import React from 'react'
 import './Rightside.css'
 import Updates from '../Updates/Updates'
 import Customer from '../CustomerReview/Customer'
-import { useNavigate } from 'react-router-dom';
+
 
 
 const Rightside = () => {

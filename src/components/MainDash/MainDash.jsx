@@ -1,26 +1,29 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Cards from '../cards/cards';
-import './MainDash.css'
+import './MainDash.css';
 
 const MainDash = () => {
-  const [refresh, setRefresh] = useState(false);
   const [orders, setOrders] = useState([]);
 
+  // Fetch from MongoDB on mount
   useEffect(() => {
-    const handler = () => setRefresh(r => !r);
-    window.addEventListener('storage', handler);
-    return () => window.removeEventListener('storage', handler);
-  }, []);
+    const fetchOrders = async () => {
+      try {
+        const res = await axios.get('http://localhost:5000/api/orders');
+        setOrders(res.data);
+      } catch (err) {
+        console.error("Failed to fetch orders:", err.message);
+      }
+    };
 
-  useEffect(() => {
-    const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    setOrders(storedOrders);
-  }, [refresh]);
+    fetchOrders();
+  }, []);
 
   return (
     <div className="MainDash">
       <h1>Dashboard</h1>
-      <Cards key={refresh} />
+      <Cards />
 
       {/* Scrollable table below cards */}
       <div className="table-wrapper">
@@ -40,15 +43,16 @@ const MainDash = () => {
           <tbody>
             {orders.length > 0 ? (
               orders.map((order) => (
-                <tr key={order.id}>
-                  <td>{order.customerName}</td>
-                  <td>{order.phone}</td>
-                  <td>{order.item}</td>
-                  <td>{order.quantity}</td>
-                  <td>{order.category}</td>
-                  <td>{order.location}</td>
-                  <td>{order.PreferredDeliveryTime}</td>
-                </tr>
+               <tr key={order._id}>
+  <td>{order.customerName}</td>
+  <td>{order.phone}</td> {/* ✅ fixed */}
+  <td>{order.item}</td>
+  <td>{order.quantity}</td>
+  <td>{order.category}</td>
+  <td>{order.location}</td>
+  <td>{order.PreferredDeliveryTime}</td>
+</tr>
+
               ))
             ) : (
               <tr>

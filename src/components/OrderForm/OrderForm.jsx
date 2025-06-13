@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import {
+  fetchOrders,
+  createOrder,
+  updateOrder,
+  deleteOrder
+} from '../../api/orderService';
 import './OrderForm.css';
 
 const OrderForm = () => {
@@ -11,168 +16,127 @@ const OrderForm = () => {
     quantity: '',
     category: '',
     location: '',
-    PreferredDeliveryTime: '',
+    PreferredDeliveryTime: ''
   });
   const [editId, setEditId] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
-    const storedOrders = JSON.parse(localStorage.getItem('orders')) || [];
-    setOrders(storedOrders);
+    fetchOrders()
+      .then(setOrders)
+      .catch((err) => console.error('Failed to fetch orders:', err.message));
   }, []);
-
-  useEffect(() => {
-    localStorage.setItem('orders', JSON.stringify(orders));
-  }, [orders]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    try {
+      if (editId) {
+        const updated = await updateOrder(editId, formData);
+        setOrders((prev) => prev.map((o) => (o._id === editId ? updated : o)));
+        setEditId(null);
+      } else {
+        const newOrder = await createOrder(formData);
+        setOrders((prev) => [newOrder, ...prev]);
+      }
 
-    if (editId) {
-      const updatedOrders = orders.map(order =>
-        order.id === editId ? { ...order, ...formData } : order
-      );
-      setOrders(updatedOrders);
-      setEditId(null);
-    } else {
-      const newOrder = {
-        id: Date.now(),
-        ...formData
-      };
-      setOrders(prev => [newOrder, ...prev]);
+      setFormData({
+        customerName: '',
+        phone: '',
+        item: '',
+        quantity: '',
+        category: '',
+        location: '',
+        PreferredDeliveryTime: ''
+      });
+    } catch (err) {
+      console.error('Failed to submit order:', err.message);
     }
-
-    setFormData({
-      customerName: '',
-      phone: '',
-      item: '',
-      quantity: '',
-      category: '',
-      location: '',
-      PreferredDeliveryTime: '',
-    });
-  };
-
-  const handleDelete = (id) => {
-    const updatedOrders = orders.filter(order => order.id !== id);
-    setOrders(updatedOrders);
   };
 
   const handleEdit = (order) => {
-    setFormData({
-      customerName: order.customerName,
-      phone: order.phone,
-      item: order.item,
-      quantity: order.quantity,
-      category: order.category,
-      location: order.location,
-      PreferredDeliveryTime: order.PreferredDeliveryTime,
-    });
-    setEditId(order.id);
+    setFormData({ ...order });
+    setEditId(order._id);
+  };
+
+  const handleDelete = async (id) => {
+    try {
+      await deleteOrder(id);
+      setOrders((prev) => prev.filter((o) => o._id !== id));
+    } catch (err) {
+      console.error('Failed to delete:', err.message);
+    }
   };
 
   return (
     <div className="order-container">
-      {/* Back button */}
-      <div style={{ textAlign: 'right', marginBottom: '1rem' }}>
-        <button
-          onClick={() => navigate('/')}
-          style={{
-            padding: '8px 16px',
-            backgroundColor: '#007bff',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Back to Home
-        </button>
-      </div>
-
       <h2>Order Management</h2>
-
       <form onSubmit={handleSubmit} className="order-form">
         <input
-          type="text"
           name="customerName"
           placeholder="Customer Name"
           value={formData.customerName}
           onChange={handleChange}
           required
         />
-
         <input
-          type="tel"
           name="phone"
-          placeholder="Enter mobile number"
+          placeholder="Phone Number"
           value={formData.phone}
           onChange={handleChange}
+          type="tel"
           pattern="[0-9]{10}"
           maxLength="10"
           required
         />
-
         <input
-          type="text"
           name="item"
           placeholder="Item"
           value={formData.item}
           onChange={handleChange}
           required
         />
-
         <input
-          type="number"
           name="quantity"
           placeholder="Quantity"
+          type="number"
           value={formData.quantity}
           onChange={handleChange}
           required
         />
-
         <select
           name="category"
           value={formData.category}
           onChange={handleChange}
           required
         >
-          <option value="">-- Select Category --</option>
+          <option value="">Select Category</option>
           <option value="Groceries">Groceries</option>
           <option value="Cloths">Cloths</option>
           <option value="Electronic Devices">Electronic Devices</option>
           <option value="Home Appliances">Home Appliances</option>
         </select>
-
         <input
-          type="text"
           name="location"
           placeholder="Location"
           value={formData.location}
           onChange={handleChange}
           required
         />
-
         <input
-          type="datetime-local"
           name="PreferredDeliveryTime"
+          type="datetime-local"
           value={formData.PreferredDeliveryTime}
           onChange={handleChange}
           required
         />
-
-        <button type="submit">
-          {editId ? 'Update Order' : 'Add Order'}
-        </button>
-
+        <button type="submit">{editId ? 'Update' : 'Add'} Order</button>
         {editId && (
           <button
             type="button"
@@ -185,7 +149,7 @@ const OrderForm = () => {
                 quantity: '',
                 category: '',
                 location: '',
-                PreferredDeliveryTime: '',
+                PreferredDeliveryTime: ''
               });
             }}
           >
@@ -194,26 +158,24 @@ const OrderForm = () => {
         )}
       </form>
 
-      <hr />
-
-      <h3>Orders</h3>
+      <h3>All Orders</h3>
       <table className="order-table">
         <thead>
           <tr>
             <th>Customer</th>
-            <th>Mobile Number</th>
+            <th>Phone</th>
             <th>Item</th>
             <th>Qty</th>
             <th>Category</th>
             <th>Location</th>
-            <th>Date & Time</th>
+            <th>Delivery Time</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           {orders.length > 0 ? (
-            orders.map(order => (
-              <tr key={order.id}>
+            orders.map((order) => (
+              <tr key={order._id}>
                 <td>{order.customerName}</td>
                 <td>{order.phone}</td>
                 <td>{order.item}</td>
@@ -222,8 +184,8 @@ const OrderForm = () => {
                 <td>{order.location}</td>
                 <td>{order.PreferredDeliveryTime}</td>
                 <td>
-                  <button className="edit-btn" onClick={() => handleEdit(order)}>Edit</button>
-                  <button className="delete-btn" onClick={() => handleDelete(order.id)}>Delete</button>
+                  <button onClick={() => handleEdit(order)}>Edit</button>
+                  <button onClick={() => handleDelete(order._id)}>Delete</button>
                 </td>
               </tr>
             ))
