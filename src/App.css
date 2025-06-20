@@ -14,6 +14,14 @@
   grid-template-columns: 11rem auto 15rem;
   overflow: hidden;
 }
+.TopRightEmail {
+  position: absolute;
+  top: 20px;
+  right: 40px;
+  font-weight: bold;
+  color: #333;
+}
+
 @media screen and (max-width: 1200px) {
   .AppGlass {
     grid-template-columns: 10% 50% auto;

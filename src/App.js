@@ -4,6 +4,7 @@ import MainDash from './components/MainDash/MainDash';
 import Rightside from './components/Rightside/Rightside';
 import OrderForm from './components/OrderForm/OrderForm';
 import { Routes, Route, Outlet } from 'react-router-dom';
+import LoginPage from './components/login/LoginPage';
 
 const DashboardLayout = () => (
   <div className="App">
@@ -18,12 +19,18 @@ const DashboardLayout = () => (
 );
 
 function App() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
   return (
     <Routes>
-      <Route path="/" element={<DashboardLayout />}>
-        <Route index element={<MainDash />} />
-        <Route path="orders" element={<OrderForm />} />
-      </Route>
+      {!isLoggedIn ? (
+        <Route path="*" element={<LoginPage />} />  // ✅ Show Login Page First
+      ) : (
+        <Route path="/" element={<DashboardLayout />}>
+          <Route index element={<MainDash />} />
+          <Route path="orders" element={<OrderForm />} />
+        </Route>
+      )}
     </Routes>
   );
 }
