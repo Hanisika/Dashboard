@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import Cards from '../cards/cards';
 import './MainDash.css';
+// import Rightside from '../Rightside/Rightside';
 
 const MainDash = () => {
   const [orders, setOrders] = useState([]);
@@ -24,6 +25,7 @@ const MainDash = () => {
     <div className="MainDash">
       <h1>Dashboard</h1>
       <Cards />
+     
 
       {/* Scrollable table below cards */}
       <div className="table-wrapper">

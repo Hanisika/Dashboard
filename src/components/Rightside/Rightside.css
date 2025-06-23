@@ -1,52 +1,49 @@
-.Rightside{
-    display: flex;
+
+.Rightside {display: flex;
     flex-direction: column;
     width: 90%;
     justify-content: space-evenly;
-}
-.h3{
-  margin-top: 2rem;
-
-}
-.Rightside {
-  padding: 1rem;
-  background-color: #f5f5f5;
+    padding: 1rem;
+  background-color: #ffffff;
   height: 100vh;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 2rem;
+    /* width: 300px;
+  flex-shrink: 0;
+  height: 100%;
+  background-color: #fff;
+  border-left: 1px solid #ccc; */
+  overflow: hidden;
 }
 
-.user-header {
+.top-user-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
-  background: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.user-info span {
-  font-size: 14px;
-  color: #555;
-}
-
-.user-info strong {
-  display: block;
-  font-size: 16px;
+.user-email {
+  font-weight: bold;
   color: #333;
 }
 
 .logout-btn {
   padding: 6px 12px;
-  background-color: #4e73df;
+  background-color: #1916b9;
   color: white;
   border: none;
   border-radius: 4px;
   cursor: pointer;
 }
+
+.logout-btn:hover {
+  background-color: #1222b1;
+}
+
 
 @media screen and (max-width: 1200px) {
   .Rightside {

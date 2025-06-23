@@ -2,6 +2,14 @@
 import axios from 'axios';
 
 const BASE_URL = 'http://localhost:5000/api/orders'; // Make sure this matches your server
+export const loginUser = (email, password) => {
+  return axios.post('http://localhost:5000/api/login', { email, password })
+    .then(res => res.data)
+    .catch(err => {
+      console.error("🚨 Login Axios Error:", err.response?.data);
+      throw err;
+    });
+};
 
 export const fetchOrders = async () => {
   const res = await axios.get(BASE_URL);

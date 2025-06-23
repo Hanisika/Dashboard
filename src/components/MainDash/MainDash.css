@@ -2,17 +2,18 @@
   padding: 1rem;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  overflow-y: auto; /* Enables scrolling */
+  height: calc(100vh - 60px); /* assuming topbar/header height if present */
+  overflow-y: auto;
+  margin-top: 2rem;
 }
 
 .MainDash h1 {
   font-size: 2rem;
-  margin-top: 12rem;
+  margin-top: 2rem;
   margin-bottom: 1rem;
-  flex-shrink: 0; 
-/* Prevent heading from shrinking */
+  flex-shrink: 0;
 }
+
 .table-wrapper {
   margin-top: 2rem;
   background-color: #e0dae2;
@@ -20,7 +21,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   overflow-x: auto;
   max-height: 400px;
-  overflow-y:auto;
+  overflow-y: auto;
 }
 
 .dashboard-table {
@@ -31,7 +32,7 @@
 
 .dashboard-table th {
   background-color: #076acc;
-  color: #333;
+  color: #fff;
   font-weight: 600;
   padding: 16px;
   text-align: left;
@@ -76,18 +77,13 @@
   }
 }
 
-/* For tablets and small desktops */
 @media screen and (max-width: 1200px) {
   .MainDash {
-               /* Ensure flex is applied */    /* Stack children vertically */
     justify-content: flex-start;
-       /* Center children horizontally */
     margin-top: 2rem;
-                 /* Optional: add spacing between items */
   }
 }
 
-/* For mobile phones */
 @media screen and (max-width: 768px) {
   .MainDash {
     align-items: center;
